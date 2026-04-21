@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Age Checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <h2>Enter Birth Year</h2>
+    <input type="number" id="birthyear" placeholder="e.g. 2001"><br><br>
+    <button id="checkBtn">Check</button>
+<script>
+    $("#checkBtn").click(function () {
+        let birthyear = $("#birthyear").val();
+        let currentYear = new Date().getFullYear();
+        let age = currentYear - birthyear;
+        let category = "";
+            try {
+                if (age >= 0 && age <= 3) {
+                    category = "Baby";
+                } else if (age <= 12) {
+                    category = "Kid";   
+                } else if (age <= 19) {
+                    category = "Teenager";
+                } else if (age <= 29) {
+                    category = "Young";
+                } else {
+                    category = "Adult";
+                } 
+                
+                let message = `Birthyear: ${birthyear}<br> Age: ${age}<br>
+                Category: ${category}`;
+
+                if (age >= 0 && age <= 19) {
+                    Swal.fire({icon: 'error',title: 'Not Eligible',html: message});
+                    Swal.fire({icon: 'error',title: 'Not Eligible',text: 'Not Eligible',html: message, imageUrl: 'https://ew.com/thmb/xe1U_xER3UmsJfCmffdbdMOi9Fo=/2000x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/00._baby_shark-2000-32cfe5c386044df0bf80e9dcf223eb4f.jpg',
+                    imageWidth: 400,imageHeight: 200,imageAlt: 'Custom image',});
+                } else {
+                    Swal.fire({icon: 'success',title: 'Eligible',html: message});
+                    Swal.fire({icon: 'success',title: 'Eligible',text: 'Eligible',html: message, imageUrl: 'https://www.harrisburgu.edu/wp-content/uploads/mcraeensis.jpg',
+                    imageWidth: 400,imageHeight: 200,imageAlt: 'Custom image',});
+                }
+            } catch (error){
+                Swal.fire({icon: 'error', title: 'Error', Text: error.message});
+            }
+        });
+</script>
+</body>
+</html>
